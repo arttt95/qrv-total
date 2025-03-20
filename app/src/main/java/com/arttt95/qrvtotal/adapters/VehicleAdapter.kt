@@ -26,8 +26,45 @@ class VehicleAdapter(
             binding.btnQth.text = vehicle.qth
             binding.btnDays.text = vehicle.days?.toString() ?: ""
 
+            binding.root.setOnClickListener {
+                onItemClick(vehicle)
+            }
+
+            binding.btnPlateLetters.setOnClickListener {
+                onItemClick(vehicle)
+            }
+
+            binding.btnPlateNumbers.setOnClickListener {
+                onItemClick(vehicle)
+            }
+
+            binding.btnBrand.setOnClickListener {
+                onItemClick(vehicle)
+            }
+
+            binding.btnModel.setOnClickListener {
+                onItemClick(vehicle)
+            }
+
+            binding.btnYear.setOnClickListener {
+                onItemClick(vehicle)
+            }
+
+            binding.btnQru.setOnClickListener {
+                onItemClick(vehicle)
+            }
+
+            binding.btnQth.setOnClickListener {
+                onItemClick(vehicle)
+            }
+
+            binding.btnDays.setOnClickListener {
+                onItemClick(vehicle)
+            }
+
             // Alterna cores para cada item
             if (position % 2 == 0) {
+
                 binding.root.setBackgroundColor(Color.parseColor("#F7F7F7")) // Cinza claro
                 binding.btnPlateLetters.setBackgroundColor(Color.parseColor("#333333")) // Cinza grafite
                 binding.btnPlateNumbers.setBackgroundColor(Color.parseColor("#333333")) // Cinza grafite
@@ -79,9 +116,6 @@ class VehicleAdapter(
     override fun onBindViewHolder(holder: VehicleViewHolder, position: Int) {
         val vehicle = items[position]
         holder.bind(vehicle)
-        holder.itemView.setOnClickListener {
-            onItemClick(vehicle)
-        }
     }
 
     override fun getItemCount(): Int = items.size

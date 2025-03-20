@@ -42,36 +42,12 @@ class AddVehicleActivity : AppCompatActivity() {
         }
 
 
-        /*brandAdapter = ArrayAdapter(
-            this, android.R.layout.simple_dropdown_item_1line, brands
-        )
-        binding.editTextAddBrand.setAdapter(brandAdapter)
-        binding.editTextAddBrand.threshold = 1
-
-        binding.editTextAddBrand.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                filterBrands(s.toString())
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-
-        })*/
-
         binding.btnInserir.setOnClickListener {
 
             addVehicle()
 
         }
 
-    }
-
-    private fun filterBrands(query: String) {
-        val filteredBrands = brands.filter { it.lowercase().contains(query.lowercase())}
-        brandAdapter.clear()
-        brandAdapter.addAll(filteredBrands)
-        brandAdapter.notifyDataSetChanged()
     }
 
     private fun addVehicle() {
