@@ -1,15 +1,19 @@
 package com.arttt95.qrvtotal.models
 
+import android.graphics.drawable.Drawable
+
 data class Vehicle(
 
     val id: String = "",
     val plate: String = "",
-    val brand: String = "",
-    val model: String = "",
+    val brand: String = "Marca",
+    val model: String = "Modelo",
     val year: Int?= null,
-    val qru: String = "",
-    val qth: String = "",
-    val days: Int? = null
+    val qru: String = "QRU",
+    val qth: String = "QTH",
+    val days: Int? = null,
+    val typeVehicle: String = "Tipo",
+    val color: String = "Cor",
 
 ) {
     val plateLetters: String

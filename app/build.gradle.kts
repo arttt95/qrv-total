@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.arttt95.qrvtotal"
-        minSdk = 27
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"

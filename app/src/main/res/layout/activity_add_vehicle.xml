@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp" >
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputAddPlate"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextAddPlate"
@@ -25,20 +25,22 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputAddBrand"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="8dp">
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
                 android:id="@+id/editTextAddBrand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Marca" />
+                android:hint="Marca"
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputAddModel"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingTop="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -51,40 +53,76 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputAddYear"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="8dp">
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
                 android:id="@+id/editTextAddYear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ano" />
+                android:hint="Ano"
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputAddQru"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="8dp">
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
                 android:id="@+id/editTextAddQru"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="QRU" />
+                android:hint="QRU"
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputAddQth"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="8dp">
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
                 android:id="@+id/editTextAddQth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="QTH" />
+                android:hint="QTH"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputAddTypeVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+            <AutoCompleteTextView
+                android:id="@+id/editTextAddTypeVehicle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tipo do Veículo"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputAddColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+            <AutoCompleteTextView
+                android:id="@+id/editTextAddColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cor"
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -96,5 +134,4 @@
             android:text="INSERIR"
             android:textSize="24sp" />
     </LinearLayout>
-
 </ScrollView>

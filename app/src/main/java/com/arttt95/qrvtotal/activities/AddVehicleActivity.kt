@@ -28,8 +28,15 @@ class AddVehicleActivity : AppCompatActivity() {
     }
 
     private lateinit var brandAdapter: ArrayAdapter<String>
+    private lateinit var yearAdapter: ArrayAdapter<String>
+    private lateinit var qruAdapter: ArrayAdapter<String>
+    private lateinit var qthAdapter: ArrayAdapter<String>
+    private lateinit var typeVehicleAdapter: ArrayAdapter<String>
+    private lateinit var colorAdapter: ArrayAdapter<String>
 
-    private val brands = arrayOf("Toyota", "Ford", "Chevrolet", "Nissan", "Honda", "Fiat", "BMW", "Mercedez", "Land Rover", "Mitsubish", "Renault", "Hyunday", "Outros")
+    private val brands = arrayOf("Toyota", "Ford", "Chevrolet", "Nissan", "Honda", "Fiat", "BMW", "Mercedes", "Land Rover", "Mitsubishi", "Renault", "Hyundai", "Outros")
+    private val cities = arrayOf("SEM QTH", "Campinas", "Sta Barbara", "Piracicaba", "Monte-Mor", "Hortolândia", "Sumaré", "Limeira", "Paulínia", "Nova Odessa", "São Paulo", "Outras")
+    private val colors = arrayOf("PT", "BR", "CZ", "VM", "AZ", "VD", "AM", "LR")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +48,37 @@ class AddVehicleActivity : AppCompatActivity() {
             insets
         }
 
+        setupDropdowns()
 
         binding.btnInserir.setOnClickListener {
 
             addVehicle()
 
         }
+
+    }
+
+    private fun setupDropdowns() {
+
+        val sortedBrands = brands.sortedArray() // Ordena o array de marcas
+        brandAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, sortedBrands)
+        binding.editTextAddBrand.setAdapter(brandAdapter)
+
+        val years = (1980..2024).reversed().map { it.toString().takeLast(2) }.toTypedArray()
+        yearAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, years)
+        binding.editTextAddYear.setAdapter(yearAdapter)
+
+        qruAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, arrayOf("SEM QRU", "B01", "B04", "Sequestro", "Ação Criminosa", "Procurado"))
+        binding.editTextAddQru.setAdapter(qruAdapter)
+
+        qthAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, cities)
+        binding.editTextAddQth.setAdapter(qthAdapter)
+
+        typeVehicleAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, arrayOf("Carro", "Moto", "Ônibus", "Caminhão"))
+        binding.editTextAddTypeVehicle.setAdapter(typeVehicleAdapter)
+
+        colorAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, colors)
+        binding.editTextAddColor.setAdapter(colorAdapter)
 
     }
 
@@ -58,6 +90,8 @@ class AddVehicleActivity : AppCompatActivity() {
         val year = binding.editTextAddYear.text.toString().trim().toIntOrNull()
         val qru = binding.editTextAddQru.text.toString().trim()
         val qth = binding.editTextAddQth.text.toString().trim()
+        val typeVehicle = binding.editTextAddTypeVehicle.text.toString().trim()
+        val color = binding.editTextAddColor.text.toString().trim()
 
         if(!validarCampos()) {
             return
@@ -92,7 +126,9 @@ class AddVehicleActivity : AppCompatActivity() {
             "qru" to qru,
             "qth" to qth,
             "days" to days,
-            "createdAt" to FieldValue.serverTimestamp()
+            "createdAt" to FieldValue.serverTimestamp(),
+            "typeVehicle" to typeVehicle,
+            "color" to color,
         )
 
         firestore.collection("vehicles")
@@ -116,6 +152,8 @@ class AddVehicleActivity : AppCompatActivity() {
         val model = binding.editTextAddModel.text.toString().trim()
         val qru = binding.editTextAddQru.text.toString().trim()
         val qth = binding.editTextAddQth.text.toString().trim()
+        val typeVehicle = binding.editTextAddTypeVehicle.text.toString().trim()
+        val color = binding.editTextAddColor.text.toString().trim()
 
         if(plate.isNotEmpty()) {
 
@@ -136,7 +174,28 @@ class AddVehicleActivity : AppCompatActivity() {
                         if(qth.isNotEmpty()) { // qth
 
                             binding.textInputAddQth.error = null
-                            return true
+
+                            if(typeVehicle.isNotEmpty()) {
+
+                                binding.textInputAddTypeVehicle.error = null
+
+                                if(color.isNotEmpty()) {
+
+                                    binding.textInputAddColor.error = null
+                                    return true
+
+                                } else {
+
+                                    binding.textInputAddColor.error = "Preencha a cor do veículo"
+                                    return false
+
+                                }
+
+                            } else {
+
+                                binding.textInputAddTypeVehicle.error = "Preencha o tipo do veículo"
+                                return false
+                            }
 
                         } else {
                             //else qth

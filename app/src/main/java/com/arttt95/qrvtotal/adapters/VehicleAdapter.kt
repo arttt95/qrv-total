@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.arttt95.qrvtotal.R
 import com.arttt95.qrvtotal.databinding.ItemVehicleBinding
 import com.arttt95.qrvtotal.models.Vehicle
 
@@ -25,6 +26,36 @@ class VehicleAdapter(
             binding.btnQru.text = vehicle.qru
             binding.btnQth.text = vehicle.qth
             binding.btnDays.text = vehicle.days?.toString() ?: ""
+            binding.btnColor.text = vehicle.color
+
+            binding.btnTypeVehicle.apply {
+                when (vehicle.typeVehicle) {
+                    "Carro" -> {
+                        setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_car_24, 0, 0)
+                        text = "" // Se não quiser texto, deixa vazio
+                    }
+                    "Moto" -> {
+                        setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_moto_24, 0, 0)
+                        text = ""
+                    }
+                    "Ônibus" -> {
+                        setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_bus_24, 0, 0)
+                        text = ""
+                    }
+                    "Caminhão" -> {
+                        setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_truck_24, 0, 0)
+                        text = ""
+                    }
+                    else -> setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+                }
+            }
+
+            binding.btnQru.text = when (vehicle.qru) {
+                "Ação Criminosa" -> "AC"
+                "Procurado" -> "MP"
+                "Sequestro" -> "Seq"
+                else -> vehicle.qru
+            }
 
             binding.root.setOnClickListener {
                 onItemClick(vehicle)
@@ -62,6 +93,14 @@ class VehicleAdapter(
                 onItemClick(vehicle)
             }
 
+            binding.btnTypeVehicle.setOnClickListener {
+                onItemClick(vehicle)
+            }
+
+            binding.btnColor.setOnClickListener {
+                onItemClick(vehicle)
+            }
+
             // Alterna cores para cada item
             if (position % 2 == 0) {
 
@@ -74,6 +113,8 @@ class VehicleAdapter(
                 binding.btnQru.setBackgroundColor(Color.parseColor("#333333")) // Cinza grafite
                 binding.btnQth.setBackgroundColor(Color.parseColor("#333333")) // Cinza grafite
                 binding.btnDays.setBackgroundColor(Color.parseColor("#333333")) // Cinza grafite
+                binding.btnTypeVehicle.setBackgroundColor(Color.parseColor("#333333")) // Cinza grafite
+                binding.btnColor.setBackgroundColor(Color.parseColor("#333333")) // Cinza grafite
 
                 binding.btnPlateLetters.setTextColor(Color.parseColor("#FFFFFF")) // Branco
                 binding.btnPlateNumbers.setTextColor(Color.parseColor("#FFFFFF")) // Branco
@@ -83,6 +124,8 @@ class VehicleAdapter(
                 binding.btnQru.setTextColor(Color.parseColor("#FFFFFF")) // Branco
                 binding.btnQth.setTextColor(Color.parseColor("#FFFFFF")) // Branco
                 binding.btnDays.setTextColor(Color.parseColor("#FFFFFF")) // Branco
+                binding.btnTypeVehicle.setTextColor(Color.parseColor("#FFFFFF")) // Branco
+                binding.btnColor.setTextColor(Color.parseColor("#FFFFFF")) // Branco
             } else {
                 binding.root.setBackgroundColor(Color.parseColor("#333333")) // Cinza grafite
                 binding.btnPlateLetters.setBackgroundColor(Color.parseColor("#F7F7F7")) // Cinza claro
@@ -93,6 +136,8 @@ class VehicleAdapter(
                 binding.btnQru.setBackgroundColor(Color.parseColor("#F7F7F7")) // Cinza claro
                 binding.btnQth.setBackgroundColor(Color.parseColor("#F7F7F7")) // Cinza claro
                 binding.btnDays.setBackgroundColor(Color.parseColor("#F7F7F7")) // Cinza claro
+                binding.btnTypeVehicle.setBackgroundColor(Color.parseColor("#F7F7F7")) // Cinza claro
+                binding.btnColor.setBackgroundColor(Color.parseColor("#F7F7F7")) // Cinza claro
 
                 binding.btnPlateLetters.setTextColor(Color.parseColor("#000000")) // Preto
                 binding.btnPlateNumbers.setTextColor(Color.parseColor("#000000")) // Preto
@@ -102,6 +147,8 @@ class VehicleAdapter(
                 binding.btnQru.setTextColor(Color.parseColor("#000000")) // Preto
                 binding.btnQth.setTextColor(Color.parseColor("#000000")) // Preto
                 binding.btnDays.setTextColor(Color.parseColor("#000000")) // Preto
+                binding.btnTypeVehicle.setTextColor(Color.parseColor("#000000")) // Preto
+                binding.btnColor.setTextColor(Color.parseColor("#000000")) // Preto
             }
 
         }
