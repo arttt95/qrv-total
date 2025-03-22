@@ -1,6 +1,7 @@
 package com.arttt95.qrvtotal.activities
 
 import android.os.Bundle
+import android.text.InputFilter
 import android.widget.ArrayAdapter
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -27,10 +28,13 @@ class AddVehicleActivity : AppCompatActivity() {
     private lateinit var qthAdapter: ArrayAdapter<String>
     private lateinit var typeVehicleAdapter: ArrayAdapter<String>
     private lateinit var colorAdapter: ArrayAdapter<String>
+    private lateinit var licensingAdapter: ArrayAdapter<String>
 
     private val brands = arrayOf("Toyota", "Ford", "Chevrolet", "Nissan", "Honda", "Fiat", "BMW", "Mercedes", "Land Rover", "Mitsubishi", "Renault", "Hyundai", "Outros")
     private val cities = arrayOf("SEM QTH", "Campinas", "Sta Barbara", "Piracicaba", "Monte-Mor", "Hortolândia", "Sumaré", "Limeira", "Paulínia", "Nova Odessa", "São Paulo", "Outras")
     private val colors = arrayOf("PT", "BR", "CZ", "VM", "AZ", "VD", "AM", "LR")
+    private val qruList = listOf("B01", "B04", "Ação Criminosa") + listOf("SEM QRU", "Outro", "Sequestro").sorted()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +46,7 @@ class AddVehicleActivity : AppCompatActivity() {
             insets
         }
 
+        filtrarPlate()
         setupDropdowns()
 
         binding.btnInserir.setOnClickListener {
@@ -62,7 +67,7 @@ class AddVehicleActivity : AppCompatActivity() {
         yearAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, years)
         binding.editTextAddYear.setAdapter(yearAdapter)
 
-        qruAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, arrayOf("SEM QRU", "B01", "B04", "Sequestro", "Ação Criminosa", "Procurado"))
+        qruAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, qruList)
         binding.editTextAddQru.setAdapter(qruAdapter)
 
         qthAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, cities)
@@ -73,6 +78,10 @@ class AddVehicleActivity : AppCompatActivity() {
 
         colorAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, colors)
         binding.editTextAddColor.setAdapter(colorAdapter)
+
+        val yearsLicensing = (2000..2024).reversed().map { it.toString().takeLast(2) }.toTypedArray()
+        licensingAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, yearsLicensing)
+        binding.editTextAddLicensing.setAdapter(licensingAdapter)
 
     }
 
@@ -87,6 +96,7 @@ class AddVehicleActivity : AppCompatActivity() {
         val qth = binding.editTextAddQth.text.toString().trim()
         val typeVehicle = binding.editTextAddTypeVehicle.text.toString().trim()
         val color = binding.editTextAddColor.text.toString().trim()
+        val licensing = binding.editTextAddLicensing.text.toString().trim()
 
         if(!validarCampos()) {
             return
@@ -125,98 +135,67 @@ class AddVehicleActivity : AppCompatActivity() {
 
     }
 
-    private fun validarCampos() : Boolean {
-
+    private fun validarCampos(): Boolean {
         val plateLetters = binding.editTextAddPlateLetters.text.toString().trim()
         val plateNumbers = binding.editTextAddPlateNumbers.text.toString().trim()
-        val brand = binding.editTextAddBrand.text.toString().trim()
-        val model = binding.editTextAddModel.text.toString().trim()
-        val qru = binding.editTextAddQru.text.toString().trim()
-        val qth = binding.editTextAddQth.text.toString().trim()
-        val typeVehicle = binding.editTextAddTypeVehicle.text.toString().trim()
-        val color = binding.editTextAddColor.text.toString().trim()
 
-        if(plateLetters.isNotEmpty()) {
+        var valid = true
 
-            binding.textInputAddPlateLetters.error = null
-
-            if(plateNumbers.isNotEmpty()) {
-
-                binding.textInputAddPlateNumbers.error = null
-
-                if(brand.isNotEmpty()) {
-
-                    binding.textInputAddBrand.error = null
-
-                    if(model.isNotEmpty()) { // model
-
-                        binding.textInputAddModel.error = null
-
-                        if(qru.isNotEmpty()) { // qru
-
-                            binding.textInputAddQru.error = null
-
-                            if(qth.isNotEmpty()) { // qth
-
-                                binding.textInputAddQth.error = null
-
-                                if(typeVehicle.isNotEmpty()) {
-
-                                    binding.textInputAddTypeVehicle.error = null
-
-                                    if(color.isNotEmpty()) {
-
-                                        binding.textInputAddColor.error = null
-                                        return true
-
-                                    } else {
-
-                                        binding.textInputAddColor.error = "Preencha a cor do veículo"
-                                        return false
-
-                                    }
-
-                                } else {
-
-                                    binding.textInputAddTypeVehicle.error = "Preencha o tipo do veículo"
-                                    return false
-                                }
-
-                            } else {
-                                //else qth
-                                binding.textInputAddQth.error = "Preencha o QTH"
-                                return false
-                            }
-
-                        } else {
-                            // qru else
-                            binding.textInputAddQru.error = "Preencha o QRU"
-                            return false
-                        }
-                    } else {
-                        // model else
-                        binding.textInputAddModel.error = "Preencha o modelo"
-                        return false
-                    }
-
-                }else {
-                    // else brand
-                    binding.textInputAddBrand.error = "Preencha a marca"
-                    return false
-                }
-
-            } else {
-
-                // else plateNumbers
-                binding.textInputAddPlateNumbers.error = "Preencha os números da placa"
-                return false
-            }
-
-        } else {
-            // else plateLetters
+        if (plateLetters.isEmpty()) {
             binding.textInputAddPlateLetters.error = "Preencha as letras da placa"
-            return false
+            valid = false
+        } else {
+            binding.textInputAddPlateLetters.error = null
         }
+
+        if (plateNumbers.isEmpty()) {
+            binding.textInputAddPlateNumbers.error = "Preencha os números da placa"
+            valid = false
+        } else {
+            binding.textInputAddPlateNumbers.error = null
+        }
+
+        return valid
+    }
+
+    private fun filtrarPlate() {
+
+        // Filtro para aceitar somente letras maiúsculas (A-Z)
+        val lettersFilter = InputFilter { source, start, end, dest, dstart, dend ->
+            for (i in start until end) {
+                if (!source[i].isLetter() || !source[i].isUpperCase()) {
+                    return@InputFilter ""
+                }
+            }
+            null
+        }
+
+        // Filtro para o campo de plateNumbers (4 caracteres):
+        // Posição 0, 2 e 3: somente dígitos
+        // Posição 1: dígito ou letra maiúscula
+        val plateNumbersFilter = InputFilter { source, start, end, dest, dstart, dend ->
+            val newText = dest.toString().substring(0, dstart) +
+                    source.subSequence(start, end) +
+                    dest.toString().substring(dend)
+            if (newText.length > 4) return@InputFilter ""
+            for (i in newText.indices) {
+                when (i) {
+                    0, 2, 3 -> {
+                        if (!newText[i].isDigit()) return@InputFilter ""
+                    }
+                    1 -> {
+                        if (!(newText[i].isDigit() || (newText[i].isLetter() && newText[i].isUpperCase()))) {
+                            return@InputFilter ""
+                        }
+                    }
+                }
+            }
+            null
+        }
+
+        // Aplique os filtros aos campos:
+        binding.editTextAddPlateLetters.filters = arrayOf(InputFilter.LengthFilter(3), lettersFilter)
+        binding.editTextAddPlateNumbers.filters = arrayOf(InputFilter.LengthFilter(4), plateNumbersFilter)
 
     }
 }
