@@ -91,11 +91,13 @@ class VehicleListActivity : AppCompatActivity() {
                         vehicleAdapter = VehicleAdapter(vehicleList) { vehicle ->
                             //Startando AlertDialog para excluir
 //                            showDeleteConfirmation(vehicle)
+                            
+                            showOptionsDialog(vehicle)
 
-                            // Startando EditVehicleActivity
+                            /*// Startando EditVehicleActivity
                             val intent = Intent(this, EditVehicleActivity::class.java)
                             intent.putExtra("VEHICLE_ID", vehicle.id)
-                            startActivity(intent)
+                            startActivity(intent)*/
                         }
                         binding.rvVehicles.adapter = vehicleAdapter
                     }
@@ -104,6 +106,22 @@ class VehicleListActivity : AppCompatActivity() {
                 }
             }
 
+    }
+
+    private fun showOptionsDialog(vehicle: Vehicle) {
+        AlertDialog.Builder(this)
+            .setTitle("Opções")
+            .setMessage("Escolha uma opção para o veículo ${vehicle.plateLetters}-${vehicle.plateNumbers}")
+            .setPositiveButton("Editar") { _, _ ->
+                val intent = Intent(this, EditVehicleActivity::class.java)
+                intent.putExtra("VEHICLE_ID", vehicle.id)
+                startActivity(intent)
+            }
+            .setNegativeButton("Excluir") { _, _ ->
+                showDeleteConfirmation(vehicle)
+            }
+            .setNeutralButton("Cancelar", null)
+            .show()
     }
 
     private fun showDeleteConfirmation(vehicle: Vehicle) {

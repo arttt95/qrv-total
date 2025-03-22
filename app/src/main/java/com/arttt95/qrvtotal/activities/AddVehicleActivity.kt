@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.arttt95.qrvtotal.databinding.ActivityAddVehicleBinding
+import com.arttt95.qrvtotal.utils.Arrays
 import com.arttt95.qrvtotal.utils.exibirMensagem
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,10 +31,10 @@ class AddVehicleActivity : AppCompatActivity() {
     private lateinit var colorAdapter: ArrayAdapter<String>
     private lateinit var licensingAdapter: ArrayAdapter<String>
 
-    private val brands = arrayOf("Toyota", "Ford", "Chevrolet", "Nissan", "Honda", "Fiat", "BMW", "Mercedes", "Land Rover", "Mitsubishi", "Renault", "Hyundai", "Outros")
+    private val brands = Arrays.brands
     private val cities = arrayOf("SEM QTH", "Campinas", "Sta Barbara", "Piracicaba", "Monte-Mor", "Hortolândia", "Sumaré", "Limeira", "Paulínia", "Nova Odessa", "São Paulo", "Outras")
     private val colors = arrayOf("PT", "BR", "CZ", "VM", "AZ", "VD", "AM", "LR")
-    private val qruList = listOf("B01", "B04", "Ação Criminosa") + listOf("SEM QRU", "Outro", "Sequestro").sorted()
+    private val qruList = listOf("B01", "B04", "Ação Criminosa") + listOf("N/I", "Outro", "Sequestro").sorted()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.arttt95.qrvtotal.databinding.ActivityEditVehicleBinding
 import com.arttt95.qrvtotal.models.Vehicle
+import com.arttt95.qrvtotal.utils.Arrays
 import com.arttt95.qrvtotal.utils.exibirMensagem
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.FirebaseFirestore
@@ -38,10 +39,10 @@ class EditVehicleActivity : AppCompatActivity() {
     private lateinit var colorAdapter: ArrayAdapter<String>
     private lateinit var licensingAdapter: ArrayAdapter<String>
 
-    private val brands = arrayOf("Toyota", "Ford", "Chevrolet", "Nissan", "Honda", "Fiat", "BMW", "Mercedes", "Land Rover", "Mitsubishi", "Renault", "Hyundai", "Outros")
-    private val cities = arrayOf("SEM QTH", "Campinas", "Sta Barbara", "Piracicaba", "Monte-Mor", "Hortolândia", "Sumaré", "Limeira", "Paulínia", "Nova Odessa", "São Paulo", "Outras")
-    private val colors = arrayOf("PT", "BR", "CZ", "VM", "AZ", "VD", "AM", "LR")
-    private val qruList = listOf("B01", "B04", "Ação Criminosa") + listOf("SEM QRU", "Outro", "Sequestro").sorted()
+    private val brands = Arrays.brands
+    private val cities = Arrays.nearbyCities + Arrays.citiesOfSaoPaulo.sorted()
+    private val colors = Arrays.colors
+    private val qruList = listOf("B01", "B04", "Ação Criminosa") + listOf("N/I", "Outro", "Sequestro").sorted()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -181,14 +182,46 @@ class EditVehicleActivity : AppCompatActivity() {
                     if (vehicle != null) {
                         binding.editTextEditPlateLetters.setText(vehicle.plateLetters)
                         binding.editTextEditPlateNumbers.setText(vehicle.plateNumbers)
-                        binding.editTextEditBrand.setText(vehicle.brand)
-                        binding.editTextEditModel.setText(vehicle.model)
-                        binding.editTextEditYear.setText(vehicle.year)
-                        binding.editTextEditLicensing.setText(vehicle.licensing)
-                        binding.editTextEditQru.setText(vehicle.qru)
-                        binding.editTextEditQth.setText(vehicle.qth)
-                        binding.editTextEditTypeVehicle.setText(vehicle.typeVehicle)
-                        binding.editTextEditColor.setText(vehicle.color)
+                        if(vehicle.brand == "N/I") {
+                            binding.editTextEditBrand.setText("")
+                        } else {
+                            binding.editTextEditBrand.setText(vehicle.brand)
+                        }
+                        if(vehicle.model == "N/I") {
+                            binding.editTextEditModel.setText("")
+                        } else {
+                            binding.editTextEditModel.setText(vehicle.model)
+                        }
+                        if(vehicle.year == "N/I") {
+                            binding.editTextEditYear.setText("")
+                        } else {
+                            binding.editTextEditYear.setText(vehicle.year)
+                        }
+                        if(vehicle.licensing == "N/I") {
+                            binding.editTextEditLicensing.setText("")
+                        } else {
+                            binding.editTextEditLicensing.setText(vehicle.licensing)
+                        }
+                        if(vehicle.qru == "N/I") {
+                            binding.editTextEditQru.setText("")
+                        } else {
+                            binding.editTextEditQru.setText(vehicle.qru)
+                        }
+                        if(vehicle.qth == "N/I") {
+                            binding.editTextEditQth.setText("")
+                        } else {
+                            binding.editTextEditQth.setText(vehicle.qth)
+                        }
+                        if(vehicle.typeVehicle == "N/I") {
+                            binding.editTextEditTypeVehicle.setText("")
+                        } else {
+                            binding.editTextEditTypeVehicle.setText(vehicle.typeVehicle)
+                        }
+                        if(vehicle.color == "N/I") {
+                            binding.editTextEditColor.setText("")
+                        } else {
+                            binding.editTextEditColor.setText(vehicle.color)
+                        }
                     }
                 } else {
                     exibirMensagem("Veículo não encontrado")
