@@ -1,18 +1,12 @@
 package com.arttt95.qrvtotal.activities
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.arttt95.qrvtotal.R
-import com.arttt95.qrvtotal.adapters.VehicleAdapter
 import com.arttt95.qrvtotal.databinding.ActivityAddVehicleBinding
-import com.arttt95.qrvtotal.models.Vehicle
 import com.arttt95.qrvtotal.utils.exibirMensagem
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -84,7 +78,8 @@ class AddVehicleActivity : AppCompatActivity() {
 
     private fun addVehicle() {
 
-        val plate = binding.editTextAddPlate.text.toString().trim()
+        val plateLetters = binding.editTextAddPlateLetters.text.toString().trim()
+        val plateNumbers = binding.editTextAddPlateNumbers.text.toString().trim()
         val brand = binding.editTextAddBrand.text.toString().trim()
         val model = binding.editTextAddModel.text.toString().trim()
         val year = binding.editTextAddYear.text.toString().trim().toIntOrNull()
@@ -101,23 +96,8 @@ class AddVehicleActivity : AppCompatActivity() {
 
         val days = 0
 
-        /*val vehicle = Vehicle(
-            id = vehicleId,
-            plate = plate,
-            brand = brand,
-            model = model,
-            year = year,
-            qru = qru,
-            qth = qth,
-            days = days
-        )*/
-
-        val plateLetters = plate.take(3)
-        val plateNumbers = plate.drop(3)
-
         val vehicleData = hashMapOf(
             "id" to vehicleId,
-            "plate" to plate,
             "plateLetters" to plateLetters,
             "plateNumbers" to plateNumbers,
             "brand" to brand,
@@ -147,7 +127,8 @@ class AddVehicleActivity : AppCompatActivity() {
 
     private fun validarCampos() : Boolean {
 
-        val plate = binding.editTextAddPlate.text.toString().trim()
+        val plateLetters = binding.editTextAddPlateLetters.text.toString().trim()
+        val plateNumbers = binding.editTextAddPlateNumbers.text.toString().trim()
         val brand = binding.editTextAddBrand.text.toString().trim()
         val model = binding.editTextAddModel.text.toString().trim()
         val qru = binding.editTextAddQru.text.toString().trim()
@@ -155,74 +136,85 @@ class AddVehicleActivity : AppCompatActivity() {
         val typeVehicle = binding.editTextAddTypeVehicle.text.toString().trim()
         val color = binding.editTextAddColor.text.toString().trim()
 
-        if(plate.isNotEmpty()) {
+        if(plateLetters.isNotEmpty()) {
 
-            binding.textInputAddPlate.error = null
+            binding.textInputAddPlateLetters.error = null
 
-            if(brand.isNotEmpty()) {
+            if(plateNumbers.isNotEmpty()) {
 
-                binding.textInputAddBrand.error = null
+                binding.textInputAddPlateNumbers.error = null
 
-                if(model.isNotEmpty()) { // model
+                if(brand.isNotEmpty()) {
 
-                    binding.textInputAddModel.error = null
+                    binding.textInputAddBrand.error = null
 
-                    if(qru.isNotEmpty()) { // qru
+                    if(model.isNotEmpty()) { // model
 
-                        binding.textInputAddQru.error = null
+                        binding.textInputAddModel.error = null
 
-                        if(qth.isNotEmpty()) { // qth
+                        if(qru.isNotEmpty()) { // qru
 
-                            binding.textInputAddQth.error = null
+                            binding.textInputAddQru.error = null
 
-                            if(typeVehicle.isNotEmpty()) {
+                            if(qth.isNotEmpty()) { // qth
 
-                                binding.textInputAddTypeVehicle.error = null
+                                binding.textInputAddQth.error = null
 
-                                if(color.isNotEmpty()) {
+                                if(typeVehicle.isNotEmpty()) {
 
-                                    binding.textInputAddColor.error = null
-                                    return true
+                                    binding.textInputAddTypeVehicle.error = null
+
+                                    if(color.isNotEmpty()) {
+
+                                        binding.textInputAddColor.error = null
+                                        return true
+
+                                    } else {
+
+                                        binding.textInputAddColor.error = "Preencha a cor do veículo"
+                                        return false
+
+                                    }
 
                                 } else {
 
-                                    binding.textInputAddColor.error = "Preencha a cor do veículo"
+                                    binding.textInputAddTypeVehicle.error = "Preencha o tipo do veículo"
                                     return false
-
                                 }
 
                             } else {
-
-                                binding.textInputAddTypeVehicle.error = "Preencha o tipo do veículo"
+                                //else qth
+                                binding.textInputAddQth.error = "Preencha o QTH"
                                 return false
                             }
 
                         } else {
-                            //else qth
-                            binding.textInputAddQth.error = "Preencha o QTH"
+                            // qru else
+                            binding.textInputAddQru.error = "Preencha o QRU"
                             return false
                         }
-
                     } else {
-                        // qru else
-                        binding.textInputAddQru.error = "Preencha o QRU"
+                        // model else
+                        binding.textInputAddModel.error = "Preencha o modelo"
                         return false
                     }
-                } else {
-                    // model else
-                    binding.textInputAddModel.error = "Preencha o modelo"
+
+                }else {
+                    // else brand
+                    binding.textInputAddBrand.error = "Preencha a marca"
                     return false
                 }
 
-            }else {
-                // else brand
-                binding.textInputAddBrand.error = "Preencha a marca"
+            } else {
+
+                // else plateNumbers
+                binding.textInputAddPlateNumbers.error = "Preencha os números da placa"
                 return false
             }
 
         } else {
-            // else plate
-            binding.textInputAddPlate.error = "Preencha a Placa"
+            // else plateLetters
+            binding.textInputAddPlateLetters.error = "Preencha as letras da placa"
             return false
         }
 

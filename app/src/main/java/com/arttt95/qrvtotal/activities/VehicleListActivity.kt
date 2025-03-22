@@ -142,7 +142,7 @@ class VehicleListActivity : AppCompatActivity() {
 
         AlertDialog.Builder(this)
             .setTitle("Excluir Veículo")
-            .setMessage("Deseja excluir o veículo ${vehicle.plate}?")
+            .setMessage("Deseja excluir o veículo ${vehicle.plateLetters}-${vehicle.plateNumbers}?")
             .setPositiveButton("SIM") { _, _ ->
                 deleteVehicle(vehicle)
             }.setNegativeButton("Não", null)
