@@ -19,13 +19,13 @@
             android:layout_marginBottom="-16dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputAddPlateLetters"
+                android:id="@+id/textInputEditPlateLetters"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextAddPlateLetters"
+                    android:id="@+id/editTextEditPlateLetters"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="AAA"
@@ -34,7 +34,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/textAddHyphen"
+                android:id="@+id/textEditHyphen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" - "
@@ -42,20 +42,19 @@
                 android:padding="4dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputAddPlateNumbers"
+                android:id="@+id/textInputEditPlateNumbers"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextAddPlateNumbers"
+                    android:id="@+id/editTextEditPlateNumbers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:hint="0000"
                     android:inputType="textCapCharacters"/>
             </com.google.android.material.textfield.TextInputLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -66,42 +65,43 @@
             android:layout_marginTop="-8dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputAddBrand"
+                android:id="@+id/textInputEditBrand"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="0dp">
+                android:layout_marginTop="8dp">
 
                 <AutoCompleteTextView
-                    android:id="@+id/editTextAddBrand"
+                    android:id="@+id/editTextEditBrand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Marca"
-                    android:inputType="none" />
+                    android:hint="Marca" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputAddModel"
+                android:id="@+id/textInputEditModel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp">
+                android:layout_marginTop="8dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextAddModel"
+                    android:id="@+id/editTextEditModel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Modelo" />
+                    android:hint="Modelo"
+                    android:drawableEnd="@drawable/ic_clear_24"
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputAddColor"
+                android:id="@+id/textInputEditColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
                 <AutoCompleteTextView
-                    android:id="@+id/editTextAddColor"
+                    android:id="@+id/editTextEditColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Cor"
@@ -109,90 +109,85 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputAddYear"
+                android:id="@+id/textInputEditYear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_marginTop="8dp">
 
                 <AutoCompleteTextView
-                    android:id="@+id/editTextAddYear"
+                    android:id="@+id/editTextEditYear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ano"
-                    android:inputType="none" />
+                    android:hint="Ano" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputAddQru"
+                android:id="@+id/textInputEditQru"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_marginTop="8dp">
 
                 <AutoCompleteTextView
-                    android:id="@+id/editTextAddQru"
+                    android:id="@+id/editTextEditQru"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="QRU"
-                    android:inputType="none" />
+                    android:hint="QRU" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputAddQth"
+                android:id="@+id/textInputEditQth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_marginTop="8dp">
 
                 <AutoCompleteTextView
-                    android:id="@+id/editTextAddQth"
+                    android:id="@+id/editTextEditQth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="QTH"
-                    android:inputType="none" />
+                    android:hint="QTH" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputAddTypeVehicle"
+                android:id="@+id/textInputEditTypeVehicle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_marginTop="8dp">
 
                 <AutoCompleteTextView
-                    android:id="@+id/editTextAddTypeVehicle"
+                    android:id="@+id/editTextEditTypeVehicle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Tipo do Veículo"
-                    android:inputType="none" />
+                    android:hint="Tipo do Veículo" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputAddLicensing"
+                android:id="@+id/textInputEditLicensing"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                android:layout_marginTop="8dp">
 
                 <AutoCompleteTextView
-                    android:id="@+id/editTextAddLicensing"
+                    android:id="@+id/editTextEditLicensing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Último licenciamento"
-                    android:inputType="none" />
+                    android:hint="Licenciamento" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/btnInserir"
+                android:id="@+id/btnEditar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="16dp"
                 android:layout_marginTop="32dp"
-                android:text="INSERIR"
+                android:text="EDITAR"
                 android:textSize="14sp"
                 app:cornerRadius="10dp" />
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>

@@ -22,7 +22,7 @@ class VehicleAdapter(
             binding.btnPlateNumbers.text = vehicle.plateNumbers
             binding.btnBrand.text = vehicle.brand
             binding.btnModel.text = vehicle.model
-            binding.btnYear.text = String.format("%02d", vehicle.year ?: "N/I")
+            binding.btnYear.text = vehicle.year
             binding.btnQru.text = when (vehicle.qru) {
                 "Ação Criminosa" -> "AC"
                 "Procurado" -> "MP"
@@ -30,7 +30,7 @@ class VehicleAdapter(
                 else -> vehicle.qru
             }
             binding.btnQth.text = vehicle.qth
-            binding.btnDays.text = vehicle.days?.toString() ?: ""
+            binding.btnDays.text = vehicle.days
             binding.btnColor.text = vehicle.color
 
             binding.btnTypeVehicle.apply {

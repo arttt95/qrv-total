@@ -63,44 +63,6 @@ class VehicleListActivity : AppCompatActivity() {
 
     private fun loadVehicles() {
 
-        /*lifecycleScope.launch {
-            try {
-                val snapshot = firestore.collection("vehicles")
-                    .orderBy("createdAt", Query.Direction.DESCENDING)
-                    .get()
-                    .await()
-                vehicleList.clear()
-                for (doc in snapshot.documents) {
-                    val vehicle = doc.toObject(Vehicle::class.java)
-                    if(vehicle != null) {
-
-                        vehicleList.add(vehicle.copy(id = doc.id))
-
-                    }
-                }
-
-                Log.d("VehicleListActivity", "Loaded vehicles: ${vehicleList.size}")
-
-                if(vehicleList.isEmpty()) {
-                    binding.textNoVehicles.visibility = View.VISIBLE
-                    binding.rvVehicles.visibility = View.GONE
-                } else {
-
-                    binding.textNoVehicles.visibility = View.GONE
-                    binding.rvVehicles.visibility = View.VISIBLE
-                    vehicleAdapter = VehicleAdapter(vehicleList) { vehicle ->
-                        showDeleteConfirmation(vehicle)
-                    }
-
-                }
-
-                binding.rvVehicles.adapter = vehicleAdapter
-
-            } catch (err: Exception) {
-                Log.i("VehicleListActivity", "Err loading vehicles", err)
-            }
-        }*/
-
         firestore.collection("vehicles")
             .orderBy("createdAt", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, error ->
@@ -127,7 +89,13 @@ class VehicleListActivity : AppCompatActivity() {
                         binding.textNoVehicles.visibility = View.GONE
                         binding.rvVehicles.visibility = View.VISIBLE
                         vehicleAdapter = VehicleAdapter(vehicleList) { vehicle ->
-                            showDeleteConfirmation(vehicle)
+                            //Startando AlertDialog para excluir
+//                            showDeleteConfirmation(vehicle)
+
+                            // Startando EditVehicleActivity
+                            val intent = Intent(this, EditVehicleActivity::class.java)
+                            intent.putExtra("VEHICLE_ID", vehicle.id)
+                            startActivity(intent)
                         }
                         binding.rvVehicles.adapter = vehicleAdapter
                     }

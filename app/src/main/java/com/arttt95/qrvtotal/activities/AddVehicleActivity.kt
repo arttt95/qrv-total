@@ -63,7 +63,7 @@ class AddVehicleActivity : AppCompatActivity() {
         brandAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, sortedBrands)
         binding.editTextAddBrand.setAdapter(brandAdapter)
 
-        val years = (1980..2024).reversed().map { it.toString().takeLast(2) }.toTypedArray()
+        val years = (1980..2025).reversed().map { it.toString().takeLast(2) }.toTypedArray()
         yearAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, years)
         binding.editTextAddYear.setAdapter(yearAdapter)
 
@@ -79,7 +79,7 @@ class AddVehicleActivity : AppCompatActivity() {
         colorAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, colors)
         binding.editTextAddColor.setAdapter(colorAdapter)
 
-        val yearsLicensing = (2000..2024).reversed().map { it.toString().takeLast(2) }.toTypedArray()
+        val yearsLicensing = (2000..2025).reversed().map { it.toString().takeLast(2) }.toTypedArray()
         licensingAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, yearsLicensing)
         binding.editTextAddLicensing.setAdapter(licensingAdapter)
 
@@ -91,7 +91,7 @@ class AddVehicleActivity : AppCompatActivity() {
         val plateNumbers = binding.editTextAddPlateNumbers.text.toString().trim()
         val brand = binding.editTextAddBrand.text.toString().trim()
         val model = binding.editTextAddModel.text.toString().trim()
-        val year = binding.editTextAddYear.text.toString().trim().toIntOrNull()
+        val year = binding.editTextAddYear.text.toString().trim()
         val qru = binding.editTextAddQru.text.toString().trim()
         val qth = binding.editTextAddQth.text.toString().trim()
         val typeVehicle = binding.editTextAddTypeVehicle.text.toString().trim()
@@ -104,21 +104,21 @@ class AddVehicleActivity : AppCompatActivity() {
 
         val vehicleId = firestore.collection("vehicles").document().id
 
-        val days = 0
 
         val vehicleData = hashMapOf(
             "id" to vehicleId,
             "plateLetters" to plateLetters,
             "plateNumbers" to plateNumbers,
-            "brand" to brand,
-            "model" to model,
-            "year" to year,
-            "qru" to qru,
-            "qth" to qth,
-            "days" to days,
+            "brand" to brand.ifEmpty { "N/I" },
+            "model" to model.ifEmpty { "N/I" },
+            "year" to year.ifEmpty { "N/I" },
+            "qru" to qru.ifEmpty { "N/I" },
+            "qth" to qth.ifEmpty { "N/I" },
+            "days" to "0",
             "createdAt" to FieldValue.serverTimestamp(),
-            "typeVehicle" to typeVehicle,
-            "color" to color,
+            "typeVehicle" to typeVehicle.ifEmpty { "N/I" },
+            "color" to color.ifEmpty { "N/I" },
+            "licensing" to licensing.ifEmpty { "N/I" },
         )
 
         firestore.collection("vehicles")
