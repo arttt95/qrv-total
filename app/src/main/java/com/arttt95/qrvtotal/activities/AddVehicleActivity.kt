@@ -32,8 +32,8 @@ class AddVehicleActivity : AppCompatActivity() {
     private lateinit var licensingAdapter: ArrayAdapter<String>
 
     private val brands = Arrays.brands
-    private val cities = arrayOf("SEM QTH", "Campinas", "Sta Barbara", "Piracicaba", "Monte-Mor", "Hortolândia", "Sumaré", "Limeira", "Paulínia", "Nova Odessa", "São Paulo", "Outras")
-    private val colors = arrayOf("PT", "BR", "CZ", "VM", "AZ", "VD", "AM", "LR")
+    private val cities = Arrays.nearbyCities + Arrays.citiesOfSaoPaulo.sorted()
+    private val colors = Arrays.colors
     private val qruList = listOf("B01", "B04", "Ação Criminosa") + listOf("N/I", "Outro", "Sequestro").sorted()
 
 
