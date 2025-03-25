@@ -15,6 +15,15 @@
         android:theme="@style/Base.Theme.QrvTotal"
         tools:targetApi="31">
         <activity
+            android:name=".activities.GroupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.GroupUsersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.GroupListActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.VehicleListActivity"
             android:exported="false" />
         <activity
@@ -24,7 +33,7 @@
         <activity
             android:name=".activities.LoginActivity"
             android:exported="false"
-            android:parentActivityName=".activities.MainActivity"/>
+            android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.EditVehicleActivity"
             android:exported="false" />
