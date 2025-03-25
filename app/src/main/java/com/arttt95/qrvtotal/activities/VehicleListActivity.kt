@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arttt95.qrvtotal.adapters.VehicleAdapter
 import com.arttt95.qrvtotal.databinding.ActivityVehicleListBinding
 import com.arttt95.qrvtotal.models.Vehicle
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
@@ -34,6 +35,8 @@ class VehicleListActivity : AppCompatActivity() {
     private var vehicleList = mutableListOf<Vehicle>()
     private var registration: ListenerRegistration? = null
 
+    private var isFabMenuOpen = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -44,16 +47,48 @@ class VehicleListActivity : AppCompatActivity() {
             insets
         }
 
+        verificarUsuarioLogado()
+
         binding.rvVehicles.layoutManager = LinearLayoutManager(this)
 
-        binding.btnAddVehicle.setOnClickListener {
-            startActivity(Intent(
-                this, AddVehicleActivity::class.java
-            ))
+        binding.fabListMenu.setOnClickListener {
+            toggleFabMenu()
+        }
+
+        binding.fabListHome.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+
+        binding.fabListAdd.setOnClickListener {
+            startActivity(Intent(this, AddVehicleActivity::class.java))
         }
 
         loadVehicles()
 
+    }
+
+    private fun verificarUsuarioLogado() {
+
+        val usuarioAtual = FirebaseAuth.getInstance().currentUser
+        if(usuarioAtual == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
+    }
+
+    private fun toggleFabMenu() {
+        if (isFabMenuOpen) {
+            // Fecha o menu: oculta os FABs
+            binding.fabListHome.hide()
+            binding.fabListAdd.hide()
+            isFabMenuOpen = false
+        } else {
+            // Abre o menu: exibe os FABs
+            binding.fabListHome.show()
+            binding.fabListAdd.show()
+            isFabMenuOpen = true
+        }
     }
 
     override fun onStop() {
@@ -62,7 +97,6 @@ class VehicleListActivity : AppCompatActivity() {
     }
 
     private fun loadVehicles() {
-
         firestore.collection("vehicles")
             .orderBy("createdAt", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, error ->
@@ -89,15 +123,7 @@ class VehicleListActivity : AppCompatActivity() {
                         binding.textNoVehicles.visibility = View.GONE
                         binding.rvVehicles.visibility = View.VISIBLE
                         vehicleAdapter = VehicleAdapter(vehicleList) { vehicle ->
-                            //Startando AlertDialog para excluir
-//                            showDeleteConfirmation(vehicle)
-                            
                             showOptionsDialog(vehicle)
-
-                            /*// Startando EditVehicleActivity
-                            val intent = Intent(this, EditVehicleActivity::class.java)
-                            intent.putExtra("VEHICLE_ID", vehicle.id)
-                            startActivity(intent)*/
                         }
                         binding.rvVehicles.adapter = vehicleAdapter
                     }
@@ -105,7 +131,6 @@ class VehicleListActivity : AppCompatActivity() {
                     Log.d("VehicleListActivity", "Current data: null")
                 }
             }
-
     }
 
     private fun showOptionsDialog(vehicle: Vehicle) {
@@ -125,15 +150,14 @@ class VehicleListActivity : AppCompatActivity() {
     }
 
     private fun showDeleteConfirmation(vehicle: Vehicle) {
-
         AlertDialog.Builder(this)
             .setTitle("Excluir Veículo")
             .setMessage("Deseja excluir o veículo ${vehicle.plateLetters}-${vehicle.plateNumbers}?")
             .setPositiveButton("SIM") { _, _ ->
                 deleteVehicle(vehicle)
-            }.setNegativeButton("Não", null)
+            }
+            .setNegativeButton("Não", null)
             .show()
-
     }
 
     private fun deleteVehicle(vehicle: Vehicle) {

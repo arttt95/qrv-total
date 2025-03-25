@@ -15,6 +15,17 @@
         android:theme="@style/Base.Theme.QrvTotal"
         tools:targetApi="31">
         <activity
+            android:name=".activities.VehicleListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CadastroActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.LoginActivity" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.MainActivity"/>
+        <activity
             android:name=".activities.EditVehicleActivity"
             android:exported="false" />
         <activity
@@ -24,7 +35,7 @@
             android:name=".activities.AddVehicleActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.VehicleListActivity"
+            android:name=".activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

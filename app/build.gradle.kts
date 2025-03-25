@@ -56,5 +56,8 @@ dependencies {
 
     implementation("com.google.firebase:firebase-analytics") // Analytics
     implementation("com.google.firebase:firebase-firestore") // Firestore
+    implementation("com.google.firebase:firebase-auth") // FirebaseAuth
+
+    // Lifecyle
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
 }
