@@ -10,7 +10,7 @@
         android:id="@+id/btnPlateLetters"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxWidth="100dip"
+        android:maxWidth="110dip"
         android:minWidth="110dip"
         android:paddingLeft="8dp"
         android:paddingTop="10dp"
@@ -20,6 +20,8 @@
         android:textSize="42dp"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnPlateNumbers"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -40,6 +42,8 @@
         app:cornerRadius="10dp"
         app:iconPadding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnModel"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnPlateLetters"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -58,6 +62,7 @@
         android:paddingBottom="0dp"
         android:text="Marca"
         app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnPlateNumbers"
         app:layout_constraintTop_toTopOf="@+id/btnPlateNumbers" />
 
@@ -76,13 +81,16 @@
         android:text="Modelo"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/btnPlateNumbers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnPlateNumbers" />
 
     <Button
         android:id="@+id/btnQth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
         android:maxWidth="120dip"
         android:maxHeight="44dip"
         android:minWidth="120dip"
@@ -91,14 +99,15 @@
         android:paddingRight="0dp"
         android:text="HT"
         app:cornerRadius="10dp"
-        app:layout_constraintStart_toEndOf="@+id/btnYear"
+        app:layout_constraintEnd_toEndOf="@+id/btnPlateNumbers"
+        app:layout_constraintStart_toStartOf="@+id/btnPlateNumbers"
         app:layout_constraintTop_toBottomOf="@+id/btnPlateNumbers" />
 
     <Button
         android:id="@+id/btnQru"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:insetTop="0dp"
         android:maxWidth="50dip"
         android:minWidth="50dip"
         android:minHeight="44dip"
@@ -106,29 +115,30 @@
         android:paddingRight="0dp"
         android:text="B04"
         app:cornerRadius="10dp"
-        app:layout_constraintStart_toEndOf="@+id/btnQth"
+        app:layout_constraintStart_toStartOf="@+id/btnModel"
         app:layout_constraintTop_toBottomOf="@+id/btnModel" />
 
     <Button
         android:id="@+id/btnYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:maxWidth="49dip"
+        android:layout_marginEnd="2dp"
+        android:insetTop="0dp"
+        android:maxWidth="54dip"
         android:minWidth="54dip"
         android:minHeight="44dip"
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
         android:text="99"
         app:cornerRadius="10dp"
-        app:layout_constraintStart_toEndOf="@+id/btnTypeVehicle"
+        app:layout_constraintEnd_toStartOf="@+id/btnQth"
         app:layout_constraintTop_toBottomOf="@+id/btnPlateLetters" />
 
     <Button
         android:id="@+id/btnDays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:insetTop="0dp"
         android:maxWidth="46dip"
         android:minWidth="46dip"
         android:minHeight="44dip"
@@ -136,29 +146,33 @@
         android:paddingRight="0dp"
         android:text="01"
         app:cornerRadius="10dp"
-        app:layout_constraintStart_toEndOf="@+id/btnColor"
+        app:layout_constraintEnd_toEndOf="@+id/btnModel"
         app:layout_constraintTop_toBottomOf="@+id/btnModel" />
 
     <Button
         android:id="@+id/btnTypeVehicle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxWidth="49dip"
+        android:layout_marginEnd="2dp"
+        android:gravity="center"
+        android:insetTop="0dp"
+        android:maxWidth="54dip"
         android:maxHeight="44dip"
         android:minWidth="54dip"
         android:minHeight="44dip"
-        android:gravity="center"
         android:padding="4dp"
         app:cornerRadius="10dp"
         app:iconPadding="4dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnYear"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnPlateLetters"
         app:layout_constraintTop_toBottomOf="@+id/btnPlateLetters" />
 
     <Button
         android:id="@+id/btnColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:insetTop="0dp"
         android:maxWidth="50dip"
         android:minWidth="50dip"
         android:minHeight="44dip"
@@ -166,6 +180,7 @@
         android:paddingRight="0dp"
         android:text="Cor"
         app:cornerRadius="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnDays"
         app:layout_constraintStart_toEndOf="@+id/btnQru"
         app:layout_constraintTop_toBottomOf="@+id/btnModel" />
 
